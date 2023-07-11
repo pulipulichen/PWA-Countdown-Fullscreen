@@ -172,18 +172,42 @@ let app = {
         return false
       }
 
+      if (this.restartStatus !== 'false') {
+        return false
+      }
+
       this.timerStatus = 'hold'
       clearTimeout(this.startTimer)
       this.startTimer = setTimeout(() => {
         if (this.timerStatus !== 'hold') {
           return false
         }
-        this.timerStatus = 'start'
-        this.startCountdown()
+        this.readyToStartHandler()
       }, this.holdTimer)
       // console.log('start')
     },
-    cancelToStart () {
+    readyToStartHandler () {
+      if (this.isCountdown) {
+        return false
+      }
+
+      if (this.timerStatus !== 'config') {
+        return false
+      }
+      
+      if (this.restartStatus !== 'false') {
+        return false
+      }
+
+      console.log('me?', this.timerStatus, this.restartStatus)
+      this.timerStatus = 'start'
+      this.startCountdown()
+    },
+    cancelToStart (event) {
+      if (event.which !== 1) {
+        return false
+      }
+
       if (this.timerStatus === 'hold') {
         this.timerStatus = 'config'
       }
@@ -269,11 +293,22 @@ let app = {
         if (this.resetStatus !== 'hold') {
           return false
         }
-        this.timerStatus = 'config'
-        if (this.db.localConfig.soundEnable) {
-          this.audioBeep.play()
-        }
+        this.readyToResetHandler()
       }, this.holdTimer)
+    },
+    readyToResetHandler () {
+      if (this.timerStatus !== 'pause') {
+        return false
+      }
+
+      this.timerStatus = 'config'
+      if (this.db.localConfig.soundEnable) {
+        this.audioBeep.play()
+
+        // setTimeout(() => {
+        //   this.restartStatus = 'false'
+        // }, 500)
+      }
     },
     cancelToReset () {
       if (this.resetStatus !== 'hold') {
@@ -295,6 +330,13 @@ let app = {
       setTimeout(() => {
         this.restartStatus = 'false'
       }, 500)
+    },
+    toggleSoundEnable () {
+      this.db.localConfig.soundEnable = !this.db.localConfig.soundEnable
+
+      if (this.db.localConfig.soundEnable) {
+        this.audioBeep.play()
+      }
     }
   }
 }

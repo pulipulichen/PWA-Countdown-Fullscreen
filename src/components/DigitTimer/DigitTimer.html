@@ -1,6 +1,5 @@
 <div class="DigitTimer"
-  @pointdown="readyToStart"
-  @pointup="cancelToStart"
+  @contextmenu.prevent.stop="readyToStartHandler"
   :class="{config: !isCountdown, pause: (this.timerStatus === 'pause')}">
 
   <div class="message-container"
@@ -19,8 +18,7 @@
 
   <div class="container"
     @click="pauseOrContinue"
-    @pointdown="readyToReset"
-    @pointup="cancelToReset">
+    @contextmenu.prevent.stop="readyToResetHandler">
     <div ref="fitty">
       <span class="digit">
         {{ min1 }}
@@ -106,7 +104,7 @@
   </div>
 
   <div class="audio-control"
-    @click.prevent.stop="db.localConfig.soundEnable = !db.localConfig.soundEnable"
+    @click.prevent.stop="toggleSoundEnable"
     :class="{hide: (timerStatus !== 'config' && timerStatus !== 'hold' && timerStatus !== 'pause')}">
     <div ref="fittyAudio">
       <i class="volume up icon"
