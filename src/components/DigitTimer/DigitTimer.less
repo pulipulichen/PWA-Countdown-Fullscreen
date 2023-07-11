@@ -69,7 +69,7 @@
     div[data-digit] {
       display: block;
       height: 100vh;
-      width: 12vw;
+      width: 8vw;
       position: fixed;
       top: 0;
       left: 0;
@@ -79,11 +79,14 @@
       align-items: center;
       justify-content: center;
 
+      &[data-digit="min1"] {
+        left: 2vw;
+      }
       &[data-digit="min2"] {
-        left: 22vw;
+        left: 24vw;
       }
       &[data-digit="colon"] {
-        left: 44vw;
+        left: 46vw;
       }
       &[data-digit="sec1"] {
         left: 56vw;
@@ -94,7 +97,7 @@
       // &[]
 
       &.digit {
-        width: 22vw;
+        width: 20vw;
       }
     }
 
@@ -133,7 +136,7 @@
       // margin-bottom: 20%;
       // display: block;
       // position: relative;
-      margin-top: -10vh;
+      margin-top: -5vh;
     }
 
   }
