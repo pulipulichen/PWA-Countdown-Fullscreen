@@ -1,6 +1,6 @@
 <div class="DigitTimer"
-  @mousedown="readyToStart"
-  @mouseup="cancelToStart"
+  @pointdown="readyToStart"
+  @pointup="cancelToStart"
   :class="{config: !isCountdown, pause: (this.timerStatus === 'pause')}">
 
   <div class="message-container"
@@ -19,8 +19,8 @@
 
   <div class="container"
     @click="pauseOrContinue"
-    @mousedown="readyToReset"
-    @mouseup="cancelToReset">
+    @pointdown="readyToReset"
+    @pointup="cancelToReset">
     <div ref="fitty">
       <span class="digit">
         {{ min1 }}
