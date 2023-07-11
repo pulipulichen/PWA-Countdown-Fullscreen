@@ -91,6 +91,7 @@
     "linkify-html": "4.1.1",
     "vue-quill-editor": "3.0.6",
     "vue-number-animation": "1.1.2",
-    "fitty": "2.3.7"
+    "fitty": "2.3.7",
+    "textfit": "2.4.0"
   }
 }
