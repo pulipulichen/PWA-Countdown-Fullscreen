@@ -1,8 +1,8 @@
 {
   "name": "Countdown Timer",
   "short_name": "Countdown",
-  "start_url": "https://pulipulichen.github.io/PWA-Countdown-Fullscreen/",
-  "scope": "https://pulipulichen.github.io/PWA-Countdown-Fullscreen/",
+  "start_url": "https://countdown-timer.pulipuli.info/",
+  "scope": "https://countdown-timer.pulipuli.info/",
   "display": "fullscreen",
   "background_color": "#E1F7F7",
   "description": "Countdown Timer",
