@@ -1,6 +1,6 @@
 <div class="DigitTimer"
-  @pointdown="readyToStart"
-  @pointup="cancelToStart"
+  @mousedown="readyToStart"
+  @mouseup="cancelToStart"
   @contextmenu.prevent.stop="readyToStartHandler"
   :class="{config: !isCountdown, pause: (this.timerStatus === 'pause')}">
 
@@ -19,78 +19,71 @@
   </div>
 
   <div class="container"
-    @click.prevent.stop="pauseOrContinue"
+    @click="pauseOrContinue"
     @contextmenu.prevent.stop="readyToResetHandler">
-    <div ref="fitty">
-      <span class="digit">
-        {{ min1 }}
-      </span>
-      <span class="digit">
-        {{ min2 }}
-      </span>
-      <span class="colon"
-      @click.prevent.stop="readyToResetHandler">
-        :
-      </span>
-      <span class="digit">
-        {{ sec1 }}
-      </span>
-      <span class="digit">
-        {{ sec2 }}
-      </span>
-    </div>
+      <div class="digit" data-digit="min1">
+        <div class="to-fitty">{{ min1 }}</div>
+      </div>
+      <div class="digit" data-digit="min2">
+        <div class="to-fitty">{{ min2 }}</div>
+      </div>
+      <div class="colon" data-digit="colon">
+        <div class="to-fitty">:</div>
+      </div>
+      <div class="digit" data-digit="sec1">
+        <div class="to-fitty">{{ sec1 }}</div>
+      </div>
+      <div class="digit" data-digit="sec2">
+        <div class="to-fitty">{{ sec2 }}</div>
+      </div>
   </div>
 
   <div class="container up"
     v-show="!isCountdown">
-    <div ref="fittyUp">
-      <span class="digit"
+      <div class="digit" data-digit="min1"
         @click="plusAttr('min1', 0, 9, 1)">
-        {{ min1 }}
-      </span>
-      <span class="digit"
+        <div class="to-fitty">{{ min1 }}</div>
+      </div>
+      <div class="digit" data-digit="min2"
         @click="plusAttr('min2', 0, 9, 1)">
-        {{ min2 }}
-      </span>
-      <span
-      @click.prevent.stop="readyToStartHandler">
+        <div class="to-fitty">{{ min2 }}</div>
+      </div>
+      <div data-digit="colon">
         :
-      </span>
-      <span class="digit"
+      </div>
+      <div class="digit" data-digit="sec1"
         @click="plusAttr('sec1', 0, 5, 1)">
-        {{ sec1 }}
-      </span>
-      <span class="digit"
+        <div class="to-fitty">{{ sec1 }}</div>
+      </div>
+      <div class="digit" data-digit="sec2"
         @click="plusAttr('sec2', 0, 9, 1)">
-        {{ sec2 }}
-      </span>
-    </div>
+        <div class="to-fitty">{{ sec2 }}</div>
+      </div>
   </div>
 
   <div class="container down"
     v-show="!isCountdown">
-    <div ref="fittyDown">
-      <span class="digit"
+
+      <div class="digit" data-digit="min1"
         @click="minusAttr('min1', 0, 9, 1)">
-        {{ min1 }}
-      </span>
-      <span class="digit"
+        <div class="to-fitty">{{ min1 }}</div>
+      </div>
+      <div class="digit" data-digit="min2"
         @click="minusAttr('min2', 0, 9, 1)">
-        {{ min2 }}
-      </span>
-      <span
-        @click.prevent.stop="readyToStartHandler">
+        <div class="to-fitty">{{ min2 }}</div>
+      </div>
+      <div data-digit="colon">
         :
-      </span>
-      <span class="digit"
+      </div>
+      <div class="digit" data-digit="sec1"
         @click="minusAttr('sec1', 0, 5, 1)">
-        {{ sec1 }}
-      </span>
-      <span class="digit"
+        <div class="to-fitty">{{ sec1 }}</div>
+      </div>
+      <div class="digit" data-digit="sec2"
         @click="minusAttr('sec2', 0, 9, 1)">
-        {{ sec2 }}
-      </span>
-    </div>
+        <div class="to-fitty">{{ sec2 }}</div>
+      </div>
+
   </div>
 
   <div class="container stop"

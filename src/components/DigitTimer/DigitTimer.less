@@ -1,6 +1,6 @@
 .DigitTimer {
 
-  font-family: 'Lato-Black', monospace;
+  font-family: 'Montserrat-ExtraBold';
 
   // border: 1px solid red;
 
@@ -66,11 +66,45 @@
     top: 0;
     left: 0;
 
-    &.up {
+    div[data-digit] {
+      display: block;
+      height: 100vh;
+      width: 12vw;
+      position: fixed;
+      top: 0;
+      left: 0;
+      // border: 1px solid red;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &[data-digit="min2"] {
+        left: 22vw;
+      }
+      &[data-digit="colon"] {
+        left: 44vw;
+      }
+      &[data-digit="sec1"] {
+        left: 56vw;
+      }
+      &[data-digit="sec2"] {
+        left: 78vw;
+      }
+      // &[]
+
+      &.digit {
+        width: 22vw;
+      }
+    }
+
+    &.up,
+    &.up div[data-digit] {
       top: -50vh;
       // background-color: rgba(128, 0, 0, 0.5);
     }
-    &.down {
+    &.down,
+    &.down div[data-digit] {
       top: 50vh;
       // background-color: rgba(0, 128, 0, 0.5);
     }
@@ -80,7 +114,7 @@
 
     &.up,
     &.down {
-      span {
+      div[data-digit] {
         opacity: 0;
 
         &.digit {
@@ -95,11 +129,11 @@
       // display: none;
     }
     
-    .colon {
+    div[data-digit="colon"] {
       // margin-bottom: 20%;
-      display: inline-block;
-      position: relative;
-      top: -7vh;
+      // display: block;
+      // position: relative;
+      margin-top: -10vh;
     }
 
   }
@@ -193,6 +227,6 @@
 }
 
 @font-face {
-  font-family: 'Lato-Black';
-  src: url('./Lato-Black.ttf') format('truetype');
+  font-family: 'Montserrat-ExtraBold';
+  src: url('./Montserrat-ExtraBold.ttf') format('truetype');
 }

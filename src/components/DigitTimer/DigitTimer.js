@@ -7,8 +7,6 @@
 import fitty from 'fitty'
 
 
-// import $ from 'jquery'
-
 let app = {
   props: ['db'],
   components: {
@@ -140,9 +138,16 @@ let app = {
       // this.$refs.fitty.forEach(el => {
       //   fitty(el)
       // })
-      fitty(this.$refs.fitty)
-      fitty(this.$refs.fittyUp)
-      fitty(this.$refs.fittyDown)
+
+      let fittyElements = document.querySelectorAll('.to-fitty')
+      for (let i = 0; i < fittyElements.length; i++) {
+        // console.log(this.$refs[fitty[i])
+        fitty(fittyElements[i])
+      }
+      // console.log($)
+      // fitty(this.$refs.fitty)
+      // fitty(this.$refs.fittyUp)
+      // fitty(this.$refs.fittyDown)
       fitty(this.$refs.fittyMessage)
       fitty(this.$refs.fittyMessagePause)
       fitty(this.$refs.fittyStop)
@@ -174,9 +179,11 @@ let app = {
       this.timerStatus = 'config'
     },
     readyToStart (event) {
+      // console.log(event, event.which, this.timerStatus, this.resetStatus)
       if (event.which !== 1) {
         return false
       }
+
 
       if (this.timerStatus !== 'config') {
         return false
@@ -192,21 +199,23 @@ let app = {
         if (this.timerStatus !== 'hold') {
           return false
         }
-        this.readyToStartHandler()
+        this.readyToStartHandler(false)
       }, this.holdTimer)
       // console.log('start')
     },
-    readyToStartHandler () {
-      if (this.isCountdown) {
-        return false
-      }
+    readyToStartHandler (check = true) {
+      if (check) {
+        if (this.isCountdown) {
+          return false
+        }
 
-      if (this.timerStatus !== 'config') {
-        return false
-      }
-      
-      if (this.restartStatus !== 'false') {
-        return false
+        if (this.timerStatus !== 'config') {
+          return false
+        }
+        
+        if (this.restartStatus !== 'false') {
+          return false
+        }
       }
 
       console.log('me?', this.timerStatus, this.restartStatus)
@@ -303,13 +312,16 @@ let app = {
         if (this.resetStatus !== 'hold') {
           return false
         }
-        this.readyToResetHandler()
+        this.readyToResetHandler(false)
       }, this.holdTimer)
     },
-    readyToResetHandler () {
-      if (this.timerStatus !== 'pause') {
-        return false
+    readyToResetHandler (check = true) {
+      if (check) {
+        if (this.timerStatus !== 'pause') {
+          return false
+        }
       }
+        
 
       this.timerStatus = 'config'
       if (this.db.localConfig.soundEnable) {
