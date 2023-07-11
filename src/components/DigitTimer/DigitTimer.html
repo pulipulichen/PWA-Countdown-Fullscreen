@@ -1,23 +1,118 @@
-<div class="DigitTimer">
-  <fitty>
-    <template v-slot:content>
-    
-      <span>
-        0
+<div class="DigitTimer"
+  @mousedown="readyToStart"
+  @mouseup="cancelToStart"
+  :class="{config: !isCountdown, pause: (this.timerStatus === 'pause')}">
+
+  <div class="message-container"
+    :class="{hide: isCountdown}">
+    <div ref="fittyMessage">
+      {{ $t('Tap to change timer. Long press to start.') }}
+    </div>
+  </div>
+
+  <div class="message-container"
+    :class="{hide: (timerStatus !== 'pause')}">
+    <div ref="fittyMessagePause">
+      {{ $t('Tap to continue. Long press to reset.') }}
+    </div>
+  </div>
+
+  <div class="container"
+    @click="pauseOrContinue"
+    @mousedown="readyToReset"
+    @mouseup="cancelToReset">
+    <div ref="fitty">
+      <span class="digit">
+        {{ min1 }}
       </span>
-      <span>
-        0
+      <span class="digit">
+        {{ min2 }}
+      </span>
+      <span class="colon">
+        :
+      </span>
+      <span class="digit">
+        {{ sec1 }}
+      </span>
+      <span class="digit">
+        {{ sec2 }}
+      </span>
+    </div>
+  </div>
+
+  <div class="container up"
+    v-show="!isCountdown">
+    <div ref="fittyUp">
+      <span class="digit"
+        @click="plusAttr('min1', 0, 9, 1)">
+        {{ min1 }}
+      </span>
+      <span class="digit"
+        @click="plusAttr('min2', 0, 9, 1)">
+        {{ min2 }}
       </span>
       <span>
         :
       </span>
-      <span>
-        1
+      <span class="digit"
+        @click="plusAttr('sec1', 0, 5, 1)">
+        {{ sec1 }}
       </span>
-      <span>
-        0
+      <span class="digit"
+        @click="plusAttr('sec2', 0, 9, 1)">
+        {{ sec2 }}
       </span>
+    </div>
+  </div>
 
-    </template>
-  </fitty>
+  <div class="container down"
+    v-show="!isCountdown">
+    <div ref="fittyDown">
+      <span class="digit"
+        @click="minusAttr('min1', 0, 9, 1)">
+        {{ min1 }}
+      </span>
+      <span class="digit"
+        @click="minusAttr('min2', 0, 9, 1)">
+        {{ min2 }}
+      </span>
+      <span>
+        :
+      </span>
+      <span class="digit"
+        @click="minusAttr('sec1', 0, 5, 1)">
+        {{ sec1 }}
+      </span>
+      <span class="digit"
+        @click="minusAttr('sec2', 0, 9, 1)">
+        {{ sec2 }}
+      </span>
+    </div>
+  </div>
+
+  <div class="container stop"
+    :class="{hide: (restartStatus === 'false'), 'fadeout': (restartStatus === 'fadeout')}"
+    @click="restart">
+    <div class="main">
+      <div ref="fittyStop">
+        {{ $t(`TIME'S UP`) }}
+      </div>
+    </div>
+    <div class="message">
+      <div ref="fittyStopMessage">
+        {{ $t(`Tap to restart`) }}
+      </div>
+    </div>
+  </div>
+
+  <div class="audio-control"
+    @click.prevent.stop="db.localConfig.soundEnable = !db.localConfig.soundEnable"
+    :class="{hide: (timerStatus !== 'config' && timerStatus !== 'hold' && timerStatus !== 'pause')}">
+    <div ref="fittyAudio">
+      <i class="volume up icon"
+        v-if="db.localConfig.soundEnable" />
+      <i class="volume off icon"
+        v-if="!db.localConfig.soundEnable" />
+    </div>
+  </div>
 </div>

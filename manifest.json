@@ -1,12 +1,12 @@
 {
-  "name": "Voting",
-  "short_name": "Voting",
+  "name": "Countdown Timer",
+  "short_name": "Countdown",
   "id": "https://pulipulichen.github.io/PWA-Countdown-Fullscreen/",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "background_color": "#E1F7F7",
-  "description": "Vote the course!",
+  "description": "Countdown Timer",
   "icons": [{
     "src": "assets/favicon/favicon.png",
     "sizes": "512x512",
