@@ -19,7 +19,7 @@
   </div>
 
   <div class="container"
-    @click="pauseOrContinue"
+    @click.prevent.stop="pauseOrContinue"
     @contextmenu.prevent.stop="readyToResetHandler">
     <div ref="fitty">
       <span class="digit">
@@ -28,7 +28,8 @@
       <span class="digit">
         {{ min2 }}
       </span>
-      <span class="colon">
+      <span class="colon"
+      @click.prevent.stop="readyToResetHandler">
         :
       </span>
       <span class="digit">
@@ -51,7 +52,8 @@
         @click="plusAttr('min2', 0, 9, 1)">
         {{ min2 }}
       </span>
-      <span>
+      <span
+      @click.prevent.stop="readyToStartHandler">
         :
       </span>
       <span class="digit"
@@ -76,7 +78,8 @@
         @click="minusAttr('min2', 0, 9, 1)">
         {{ min2 }}
       </span>
-      <span>
+      <span
+        @click.prevent.stop="readyToStartHandler">
         :
       </span>
       <span class="digit"
