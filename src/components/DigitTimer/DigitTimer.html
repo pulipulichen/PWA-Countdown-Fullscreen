@@ -1,4 +1,6 @@
 <div class="DigitTimer"
+  @pointdown="readyToStart"
+  @pointup="cancelToStart"
   @contextmenu.prevent.stop="readyToStartHandler"
   :class="{config: !isCountdown, pause: (this.timerStatus === 'pause')}">
 

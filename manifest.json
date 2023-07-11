@@ -3,7 +3,7 @@
   "short_name": "Countdown",
   "start_url": "/",
   "scope": "/",
-  "display": "standalone",
+  "display": "fullscreen",
   "background_color": "#E1F7F7",
   "description": "Countdown Timer",
   "orientation": "landscape",
