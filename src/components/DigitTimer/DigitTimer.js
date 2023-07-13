@@ -156,6 +156,8 @@ let app = {
 
       fitty.fitAll()
     }, 1000)
+
+    this.db.utils.PWAUtils.requestWakeLock()
   },
   methods: {
     plusAttr (attr, min = 0, max = 9, interval = 1) {
