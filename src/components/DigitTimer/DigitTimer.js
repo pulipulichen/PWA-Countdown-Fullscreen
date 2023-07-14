@@ -19,20 +19,10 @@ let app = {
       // min2: 2,
       // sec1: 0,
       // sec2: 0
-      timerStatus: 'config',
-      timerSecond: -1,
+      
       countdownTimer: null,
       startTimer: null,
-      resetStatus: 'false',
       resetTimer: null,
-
-      holdTimer: 1000,
-      restartStatus: 'false',
-
-      audioLevelUp: new Audio('./assets/audios/correct-6033.mp3'),
-      audioBeep: new Audio('./assets/audios/beep-sound-8333.mp3'),
-      audioFinalCountdown: new Audio('./assets/audios/countdown-3-96619.mp3'),
-      audioFinish: new Audio('./assets/audios/success-1-6297.mp3'),
     }
   },
   watch: {
@@ -41,11 +31,31 @@ let app = {
     },
   },
   computed: {
-    isCountdown () {
-      return (this.timerStatus === 'start' || 
-      this.timerStatus === 'stop' ||
-      this.timerStatus === 'pause')
+    computedClassName () {
+      let className = []
+
+      if (!this.isCountdown) {
+        className.push('config')
+      }
+
+      if (this.db.config.timerStatus === 'pause') {
+        className.push('pause')
+      }
+
+      if (this.db.Index.isLV1Time) {
+        className.push('lv1')
+      }
+      else if (this.db.Index.isLV2Time) {
+        className.push('lv2')
+      }
+      else if (this.db.Index.isTimeToPlaySound) {
+        className.push('lv1')
+      }
+
+      return className
     },
+    isCountdown () {return this.$parent.isCountdown},
+    isTimeToPlaySound () {return this.$parent.isTimeToPlaySound},
     min1 () {
       if (this.isCountdown) {
         return this.countdownMin1
@@ -72,7 +82,7 @@ let app = {
     },
 
     countdownMin () {
-      return Math.floor(this.timerSecond / 60)
+      return Math.floor(this.db.config.timerSecond / 60)
     },
     countdownMin1 () {
       if (this.countdownMin < 10) {
@@ -84,7 +94,7 @@ let app = {
       return this.countdownMin % 10
     },
     countdownSec () {
-      return this.timerSecond % 60
+      return this.db.config.timerSecond % 60
     },
     countdownSec1 () {
       if (this.countdownSec < 10) {
@@ -96,21 +106,7 @@ let app = {
       return this.countdownSec % 10
     },
 
-    isTimeToPlaySound () {
-      if (this.timerSecond >= 300) {
-        return (this.timerSecond % 300 === 0)
-      }
-      else if (this.timerSecond >= 60) {
-        return (this.timerSecond % 60 === 0)
-      }
-      else if (this.timerSecond <= 5 && this.timerSecond > 0) {
-        return true
-      }
-      else if (this.timerSecond === 30) {
-        return true
-      }
-      return false
-    }
+    
     
   },
   mounted() {
@@ -122,44 +118,37 @@ let app = {
     //   console.log(fitty)
     //   fitty.fitAll()
     // }, 1000)
-    window.addEventListener("scroll", preventMotion, false);
-    window.addEventListener("touchmove", preventMotion, false);
     
-    function preventMotion(event)
-    {
-        window.scrollTo(0, 0);
-        event.preventDefault();
-        event.stopPropagation();
-    }
-
-
-    setTimeout(() => {
-      // // console.log(fitty)
-      // this.$refs.fitty.forEach(el => {
-      //   fitty(el)
-      // })
-
-      let fittyElements = document.querySelectorAll('.to-fitty')
-      for (let i = 0; i < fittyElements.length; i++) {
-        // console.log(this.$refs[fitty[i])
-        fitty(fittyElements[i])
-      }
-      // console.log($)
-      // fitty(this.$refs.fitty)
-      // fitty(this.$refs.fittyUp)
-      // fitty(this.$refs.fittyDown)
-      fitty(this.$refs.fittyMessage)
-      fitty(this.$refs.fittyMessagePause)
-      fitty(this.$refs.fittyStop)
-      fitty(this.$refs.fittyStopMessage)
-      fitty(this.$refs.fittyAudio)
-
-      fitty.fitAll()
-    }, 1000)
-
-    this.db.utils.PWAUtils.requestWakeLock()
+    this.$parent.initAPP()
+    this.initFitty()
   },
   methods: {
+    
+    initFitty () {
+      setTimeout(() => {
+        // // console.log(fitty)
+        // this.$refs.fitty.forEach(el => {
+        //   fitty(el)
+        // })
+  
+        let fittyElements = document.querySelectorAll('.to-fitty')
+        for (let i = 0; i < fittyElements.length; i++) {
+          // console.log(this.$refs[fitty[i])
+          fitty(fittyElements[i])
+        }
+        // console.log($)
+        // fitty(this.$refs.fitty)
+        // fitty(this.$refs.fittyUp)
+        // fitty(this.$refs.fittyDown)
+        // fitty(this.$refs.fittyMessage)
+        // fitty(this.$refs.fittyMessagePause)
+        // fitty(this.$refs.fittyStop)
+        // fitty(this.$refs.fittyStopMessage)
+        // fitty(this.$refs.fittyAudio)
+  
+        fitty.fitAll()
+      }, 1000)
+    },
     plusAttr (attr, min = 0, max = 9, interval = 1) {
       if (this.isCountdown) {
         return false
@@ -168,7 +157,7 @@ let app = {
       if (this.db.localConfig[attr] > max) {
         this.db.localConfig[attr] = (this.db.localConfig[attr] - max - 1)
       }
-      this.timerStatus = 'config'
+      this.db.config.timerStatus = 'config'
     },
     minusAttr (attr, min = 0, max = 9, interval = 1) {
       if (this.isCountdown) {
@@ -178,7 +167,7 @@ let app = {
       if (this.db.localConfig[attr] < min) {
         this.db.localConfig[attr] = max - (min - this[attr] - 1)
       }
-      this.timerStatus = 'config'
+      this.db.config.timerStatus = 'config'
     },
     readyToStart (event) {
       // console.log(event, event.which, this.timerStatus, this.resetStatus)
@@ -187,22 +176,22 @@ let app = {
       }
 
 
-      if (this.timerStatus !== 'config') {
+      if (this.db.config.timerStatus !== 'config') {
         return false
       }
 
-      if (this.restartStatus !== 'false') {
+      if (this.db.config.restartStatus !== 'false') {
         return false
       }
 
-      this.timerStatus = 'hold'
+      this.db.config.timerStatus = 'hold'
       clearTimeout(this.startTimer)
       this.startTimer = setTimeout(() => {
-        if (this.timerStatus !== 'hold') {
+        if (this.db.config.timerStatus !== 'hold') {
           return false
         }
         this.readyToStartHandler(false)
-      }, this.holdTimer)
+      }, this.db.config.holdTimer)
       // console.log('start')
     },
     readyToStartHandler (check = true) {
@@ -211,17 +200,17 @@ let app = {
           return false
         }
 
-        if (this.timerStatus !== 'config') {
+        if (this.db.config.timerStatus !== 'config') {
           return false
         }
         
-        if (this.restartStatus !== 'false') {
+        if (this.db.config.restartStatus !== 'false') {
           return false
         }
       }
 
-      console.log('me?', this.timerStatus, this.restartStatus)
-      this.timerStatus = 'start'
+      // console.log('me?', this.timerStatus, this.restartStatus)
+      this.db.config.timerStatus = 'start'
       this.startCountdown()
     },
     cancelToStart (event) {
@@ -229,43 +218,44 @@ let app = {
         return false
       }
 
-      if (this.timerStatus === 'hold') {
-        this.timerStatus = 'config'
+      if (this.db.config.timerStatus === 'hold') {
+        this.db.config.timerStatus = 'config'
       }
     },
     startCountdown () {
-      this.timerSecond = this.db.localConfig.sec2 + 
-        (this.db.localConfig.sec1 * 10) +
-        (this.db.localConfig.min2 * 60) +
-        (this.db.localConfig.min1 * 600)
+      this.db.config.timerSecond = this.$parent.configTimerSecond
 
       this.startCountdownInterval()
     },
     startCountdownInterval () {
       if (this.db.localConfig.soundEnable) {
-        this.audioBeep.play()
+        this.db.config.audioBeep.play()
       }
+
+      this.db.Index.vibrate()
       clearInterval(this.countdownTimer)
       this.countdownTimer = setInterval(() => {
-        this.timerSecond--
-        this.playTickSoundEffect()
-
-        if (this.timerSecond === 0) {
-          clearInterval(this.countdownTimer)
-
-          if (this.db.localConfig.soundEnable) {
-            this.audioFinish.play()
-          }
-          setTimeout(() => {
-            this.timerStatus = 'stop'
-            this.restartStatus = 'wait'
-
-            setTimeout(() => {
-              this.restart()
-            }, 10000)
-          }, 100)
-        }
+        this.startCountdownIntervalHandler()
       }, 1000)
+    },
+    startCountdownIntervalHandler () {
+      this.db.config.timerSecond--
+      this.playTickSoundEffect()
+
+      if (this.db.config.timerSecond === 0) {
+        this.countdownIntervalStopHandler()
+      }
+    },
+    countdownIntervalStopHandler () {
+      clearInterval(this.countdownTimer)
+
+      if (this.db.localConfig.soundEnable) {
+        this.db.config.audioFinish.play()
+      }
+      setTimeout(() => {
+        this.db.config.timerStatus = 'stop'
+        this.db.config.restartStatus = 'wait'
+      }, 100)
     },
     playTickSoundEffect () {
       if (!this.isTimeToPlaySound) {
@@ -276,29 +266,34 @@ let app = {
         return false
       }
 
-      if (this.timerSecond >= 30) {
-        this.audioLevelUp.play()
+      if (this.db.config.timerSecond >= 30) {
+        this.$parent.vibrate()
+        this.db.config.audioLevelUp.play()
       }
       else {
-        this.audioFinalCountdown.pause()
-        this.audioFinalCountdown.currentTime = 0
-        this.audioFinalCountdown.play()
+        this.db.config.audioFinalCountdown.pause()
+        this.db.config.audioFinalCountdown.currentTime = 0
+        this.db.config.audioFinalCountdown.play()
       }
+
+      
     },
+    
     pauseOrContinue () {
       if (!this.isCountdown) {
         return false
       }
 
-      if (this.timerStatus === 'start') {
-        this.timerStatus = 'pause'
+      if (this.db.config.timerStatus === 'start') {
+        this.db.config.timerStatus = 'pause'
         if (this.db.localConfig.soundEnable) {
-          this.audioBeep.play()
+          this.db.config.audioBeep.play()
         }
+        this.$parent.vibrate()
         clearInterval(this.countdownTimer)
       }
-      else if (this.timerStatus === 'pause') {
-        this.timerStatus = 'start'
+      else if (this.db.config.timerStatus === 'pause') {
+        this.db.config.timerStatus = 'start'
         this.startCountdownInterval()
       }
     },
@@ -306,28 +301,28 @@ let app = {
       if (event.which !== 1) {
         return false
       }
-      this.resetStatus = 'hold'
-      console.log(this.resetStatus)
+      this.db.config.resetStatus = 'hold'
+      // console.log(this.resetStatus)
       clearTimeout(this.resetTimer)
       this.resetTimer = setTimeout (() => {
         // console.log('gogogo?')
-        if (this.resetStatus !== 'hold') {
+        if (this.db.config.resetStatus !== 'hold') {
           return false
         }
         this.readyToResetHandler(false)
-      }, this.holdTimer)
+      }, this.db.config.holdTimer)
     },
     readyToResetHandler (check = true) {
       if (check) {
-        if (this.timerStatus !== 'pause') {
+        if (this.db.config.timerStatus !== 'pause') {
           return false
         }
       }
         
 
-      this.timerStatus = 'config'
+      this.db.config.timerStatus = 'config'
       if (this.db.localConfig.soundEnable) {
-        this.audioBeep.play()
+        this.db.config.audioBeep.play()
 
         // setTimeout(() => {
         //   this.restartStatus = 'false'
@@ -335,33 +330,12 @@ let app = {
       }
     },
     cancelToReset () {
-      if (this.resetStatus !== 'hold') {
+      if (this.db.config.resetStatus !== 'hold') {
         return false
       }
-      this.resetStatus = 'false'
+      this.db.config.resetStatus = 'false'
       clearTimeout(this.resetTimer)
     },
-    restart () {
-      if (this.restartStatus !== 'wait') {
-        return false
-      }
-      this.restartStatus = 'fadeout'
-      this.timerStatus = 'config'
-      // console.log(this.restartStatus)
-      if (this.db.localConfig.soundEnable) {
-        this.audioBeep.play()
-      }
-      setTimeout(() => {
-        this.restartStatus = 'false'
-      }, 500)
-    },
-    toggleSoundEnable () {
-      this.db.localConfig.soundEnable = !this.db.localConfig.soundEnable
-
-      if (this.db.localConfig.soundEnable) {
-        this.audioBeep.play()
-      }
-    }
   }
 }
 

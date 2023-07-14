@@ -9,6 +9,10 @@ let Index = {
     // WebcamVideo: () => import(/* webpackChunkName: "components/WebcamVideo" */ './WebcamVideo/WebcamVideo.vue'),
     // VotePanel: () => import(/* webpackChunkName: "components/VotePanel" */ './VotePanel/VotePanel.vue'),
     DigitTimer: () => import(/* webpackChunkName: "components/DigitTimer" */ './DigitTimer/DigitTimer.vue'),
+    AudioControlPanel: () => import(/* webpackChunkName: "components/AudioControlPanel" */ './AudioControlPanel/AudioControlPanel.vue'),
+    StopPanel: () => import(/* webpackChunkName: "components/StopPanel" */ './StopPanel/StopPanel.vue'),
+    MessagePanel: () => import(/* webpackChunkName: "components/MessagePanel" */ './MessagePanel/MessagePanel.vue'),
+    ProgressPanel: () => import(/* webpackChunkName: "components/ProgressPanel" */ './ProgressPanel/ProgressPanel.vue'),
   },
   data() {
     this.$i18n.locale = this.db.config.localConfig
@@ -60,7 +64,7 @@ let Index = {
     }
 
     this.initFileSystem()
-    
+    this.db.Index = this
     // this.initTaskUtils()
   },
   methods: {
@@ -102,5 +106,11 @@ let Index = {
     
   }
 }
+
+import IndexMethodsPWA from './IndexMethodsPWA.js'
+IndexMethodsPWA(Index)
+
+import IndexComputed from './IndexComputed.js'
+IndexComputed(Index)
 
 export default Index

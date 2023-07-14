@@ -1,0 +1,10 @@
+<div class="AudioControlPanel audio-control"
+  @click.prevent.stop="toggleSoundEnable"
+  :class="{hide: isHidden}">
+  <div ref="fittyAudio">
+    <i class="volume up icon"
+      v-if="db.localConfig.soundEnable" />
+    <i class="volume off icon"
+      v-if="!db.localConfig.soundEnable" />
+  </div>
+</div>

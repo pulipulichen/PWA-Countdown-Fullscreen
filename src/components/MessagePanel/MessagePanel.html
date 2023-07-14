@@ -1,0 +1,17 @@
+<div class="MessagePanel">
+  
+  <div class="message-container"
+    :class="{hide: isCountdown}">
+    <div ref="fittyMessage">
+      {{ $t('Tap to change timer. Long press to start.') }}
+    </div>
+  </div>
+
+  <div class="message-container"
+    :class="{hide: (db.config.timerStatus !== 'pause')}">
+    <div ref="fittyMessagePause">
+      {{ $t('Tap to continue. Long press to reset.') }}
+    </div>
+  </div>
+  
+</div>

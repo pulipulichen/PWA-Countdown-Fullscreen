@@ -1,10 +1,11 @@
 .DigitTimer {
 
-  font-family: 'ChivoMono-ExtraBold';
+  
 
   // border: 1px solid red;
 
   color: white !important;
+  transition: color 0.5s ease-in-out;
 
   // &.config,
   &.pause {
@@ -13,6 +14,17 @@
 
   &.pause .container {
     cursor: pointer;
+  }
+
+  &.lv1 {
+    color: yellow !important;
+    transition: color 0.1s ease-in-out;
+  }
+
+  &.lv2,
+  &.final-countdown {
+    color: lightcoral !important;
+    transition: color 0.1s ease-in-out;
   }
 
 
@@ -54,6 +66,8 @@
   // }
 
   .container {
+    font-family: 'ChivoMono-ExtraBold';
+
     width: 100vw;
     height: 100vh;
     // background-color: red;
@@ -78,6 +92,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
+
+      
+
 
       &[data-digit="min1"] {
         left: 2vw;
@@ -141,95 +158,11 @@
 
   }
 
-  .message-container {
-    z-index: -1;
-    position: fixed;
-    top: 5vh;
-    left: 10vw;
-
-    width: 80vw;
-    height: 10vh;
-    
-    text-align: center;
-    color: white !important;
-
-    &.hide {
-      opacity: 0;
-    }
-  }
-
-  .container.stop {
-    background-color: red;
-    opacity: 1;
-    transition: opacity 0.5s linear;
-
-    cursor: pointer;
-
-    &.fadeout {
-      opacity: 0;
-    }
-
-    .main {
-      position: fixed;
-      left: 10vw;
-      top: 10vh;
-
-      width: 80vw;
-      height: 50vh;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .message {
-      position: fixed;
-      left: 30vw;
-      top: 70vh;
-
-      width: 40vw;
-      height: 20vh;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    &.hide {
-      opacity: 0;
-      left: 100vw;
-
-      .main, .message {
-        left: 100vw;
-      }
-    }
-  }
-
-  .audio-control {
-    position: fixed;
-    right: 0;
-    bottom: 10vh;
-
-    width: 7vw;
-    height: 15vh;
-    
-    color: yellow;
-
-    &.hide {
-      opacity: 0;
-      z-index: -1;
-    }
-
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    margin-bottom: -5vh;
-    cursor: pointer;
-    z-index: 2;
-  }
+  
+  
 }
 
 @font-face {
   font-family: 'ChivoMono-ExtraBold';
-  src: url('./ChivoMono-ExtraBold.ttf') format('truetype');
+  src: url('./../fonts/ChivoMono-ExtraBold.ttf') format('truetype');
 }

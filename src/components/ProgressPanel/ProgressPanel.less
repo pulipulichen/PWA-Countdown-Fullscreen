@@ -1,0 +1,32 @@
+.ProgressPanel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+
+  width: 100vw;
+  height: 2vh;
+  background-color: lightgray;
+  transition: width 0.5s ease-in-out, color 0.5s ease-in-out;
+  
+  &::-webkit-progress-value {
+    background-color: #CCC;
+  }
+
+  &.lv1::-webkit-progress-value {
+    background-color: yellow;
+  }
+    
+  &.lv2::-webkit-progress-value {
+    background-color: lightcoral;
+  }
+
+  display: none;
+  &.show {
+    display: block;
+  }
+
+  &::-webkit-progress-value {
+    transition: width 0.5s;
+  }
+}

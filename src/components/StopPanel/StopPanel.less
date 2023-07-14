@@ -1,0 +1,73 @@
+.StopPanel {
+  color: white !important;
+
+  &.container {
+    font-family: 'ChivoMono-ExtraBold';
+
+    width: 100vw;
+    height: 100vh;
+    // background-color: red;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    user-select: none;
+
+    &.stop {
+      background-color: red;
+      opacity: 1;
+      transition: opacity 0.5s linear;
+  
+      cursor: pointer;
+  
+      &.fadeout {
+        opacity: 0;
+      }
+  
+      .main {
+        position: fixed;
+        left: 10vw;
+        top: 10vh;
+  
+        width: 80vw;
+        height: 50vh;
+  
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+  
+      .message {
+        position: fixed;
+        left: 30vw;
+        top: 70vh;
+  
+        width: 40vw;
+        height: 20vh;
+  
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+  
+      &.hide {
+        opacity: 0;
+        left: 100vw;
+  
+        .main, .message {
+          left: 100vw;
+        }
+      }
+    }
+  }
+}
+
+@font-face {
+  font-family: 'ChivoMono-ExtraBold';
+  src: url('./../fonts/ChivoMono-ExtraBold.ttf') format('truetype');
+}

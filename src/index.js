@@ -108,6 +108,7 @@ let VueController = {
       localConfig: localConfig,
       defaultLocalConfig: JSON.parse(JSON.stringify(localConfig)),
       utils: utils,
+      Index: null
     },
     errors: [],
   },

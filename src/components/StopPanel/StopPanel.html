@@ -1,0 +1,14 @@
+<div class="StopPanel container stop"
+  :class="computedClassName"
+  @click="restart">
+  <div class="main">
+    <div ref="fittyStop">
+      {{ $t(`TIME'S UP`) }}
+    </div>
+  </div>
+  <div class="message">
+    <div ref="fittyStopMessage">
+      {{ $t(`Tap to restart`) }}
+    </div>
+  </div>
+</div>
