@@ -16,7 +16,7 @@
 // Names of the two caches used in this version of the service worker.
 // Change to v2, etc. when you update any of the local resources, which will
 // in turn trigger the install event again.
-const PRECACHE = 'precache-v20230712-0119';
+const PRECACHE = 'precache-v20230712-010';
 const RUNTIME = 'runtime';
 
 /**
@@ -31,11 +31,11 @@ const PRECACHE_URLS = [
   'index.html',
   'manifest.json',
   'service-worker.js',
-  'dist/index.js',
-  'assets/audios/beep-sound-8333.mp3',
-  'assets/audios/correct-6033.mp3',
-  'assets/audios/countdown-3-96619.mp3',
-  'assets/audios/success-1-6297.mp3',
+  './dist/index.js',
+  './assets/audios/beep-sound-8333.mp3',
+  './assets/audios/correct-6033.mp3',
+  './assets/audios/countdown-3-96619.mp3',
+  './assets/audios/success-1-6297.mp3',
 ];
 
 // The install handler takes care of precaching the resources we always need.

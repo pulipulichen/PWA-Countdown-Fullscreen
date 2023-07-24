@@ -17,7 +17,13 @@ let config = {
 
   audioLevelUp: new Audio('./assets/audios/correct-6033.mp3'),
   audioBeep: new Audio('./assets/audios/beep-sound-8333.mp3'),
-  audioFinalCountdown: new Audio('./assets/audios/countdown-3-96619.mp3'),
+  audioFinalCountdown: [
+    new Audio('./assets/audios/countdown-3-96619.mp3'),
+    new Audio('./assets/audios/countdown-3-96619.mp3'),
+    new Audio('./assets/audios/countdown-3-96619.mp3'),
+    new Audio('./assets/audios/countdown-3-96619.mp3'),
+    new Audio('./assets/audios/countdown-3-96619.mp3')
+  ],
   audioFinish: new Audio('./assets/audios/success-1-6297.mp3'),
 }
 

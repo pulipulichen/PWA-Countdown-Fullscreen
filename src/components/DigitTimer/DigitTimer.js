@@ -271,9 +271,11 @@ let app = {
         this.db.config.audioLevelUp.play()
       }
       else {
-        this.db.config.audioFinalCountdown.pause()
-        this.db.config.audioFinalCountdown.currentTime = 0
-        this.db.config.audioFinalCountdown.play()
+        // this.db.config.audioFinalCountdown.pause()
+        // this.db.config.audioFinalCountdown.currentTime = 0
+        // this.db.config.audioFinalCountdown.play()
+        let index = this.db.config.timerSecond - 1
+        this.db.config.audioFinalCountdown[index].play()
       }
 
       
