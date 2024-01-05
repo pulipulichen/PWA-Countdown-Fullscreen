@@ -24,7 +24,7 @@ export default function (app) {
     else if (timerSecond >= 60) {
       return (timerSecond % 60 === 0)
     }
-    else if (timerSecond <= 5 && timerSecond > 0) {
+    else if (timerSecond <= 3 && timerSecond > 0) {
       return true
     }
     else if (timerSecond === 30) {
