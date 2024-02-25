@@ -7,7 +7,8 @@
 
 const path = require('path')
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const { web } = require('webpack');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 let compileCount = 0
@@ -164,7 +165,8 @@ module.exports = (env, argv) => {
   // -------------------------------------------------------------------
 
   if (argv.mode === 'production') {
-    webpackConfig.devtool = 'eval-cheap-module-source-map'
+    // webpackConfig.devtool = 'eval-cheap-module-source-map'
+    webpackConfig.devtool = 'source-map'
 
     webpackConfig.module.rules[0] = {
       test: /\.css$/, // 針對所有.css 的檔案作預處理，這邊是用 regular express 的格式
@@ -251,9 +253,11 @@ module.exports = (env, argv) => {
     }
   }
   
-  if (argv.mode === 'development') {
+  // if (argv.mode === 'development') {
+  //   delete webpackConfig.devtool
+  // }
 
-  }
+  // console.log('source-map', webpackConfig.devtool)
 
   return webpackConfig
 }

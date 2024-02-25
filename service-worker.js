@@ -16,7 +16,7 @@
 // Names of the two caches used in this version of the service worker.
 // Change to v2, etc. when you update any of the local resources, which will
 // in turn trigger the install event again.
-const PRECACHE = 'precache-v20230712-010';
+const PRECACHE = 'precache-v20240226-014047';
 const RUNTIME = 'runtime';
 
 /**
@@ -28,14 +28,49 @@ const RUNTIME = 'runtime';
 
 // A list of local resources we always want to be cached.
 const PRECACHE_URLS = [
-  'index.html',
-  'manifest.json',
-  'service-worker.js',
-  './dist/index.js',
-  './assets/audios/beep-sound-8333.mp3',
-  './assets/audios/correct-6033.mp3',
-  './assets/audios/countdown-3-96619.mp3',
-  './assets/audios/success-1-6297.mp3',
+  "dist/asset/01_00.svg",
+  "dist/asset/8-bit-powerup-6768.mp3",
+  "dist/asset/ChivoMono-ExtraBold.ttf",
+  "dist/asset/Inconsolata-ExtraBold.ttf",
+  "dist/asset/Lato-Black.ttf",
+  "dist/asset/Montserrat-ExtraBold.ttf",
+  "dist/asset/Oswald-Bold.ttf",
+  "dist/asset/beep-sound-8333.mp3",
+  "dist/asset/brand-icons.eot",
+  "dist/asset/brand-icons.svg",
+  "dist/asset/brand-icons.ttf",
+  "dist/asset/brand-icons.woff",
+  "dist/asset/brand-icons.woff2",
+  "dist/asset/flags.png",
+  "dist/asset/icons.eot",
+  "dist/asset/icons.svg",
+  "dist/asset/icons.ttf",
+  "dist/asset/icons.woff",
+  "dist/asset/icons.woff2",
+  "dist/asset/outline-icons.eot",
+  "dist/asset/outline-icons.svg",
+  "dist/asset/outline-icons.ttf",
+  "dist/asset/outline-icons.woff",
+  "dist/asset/outline-icons.woff2",
+  "dist/asset/success-1-6297.mp3",
+  "dist/components/AudioControlPanel.js",
+  "dist/components/AudioControlPanel.js.map",
+  "dist/components/DigitTimer.js",
+  "dist/components/DigitTimer.js.map",
+  "dist/components/MessagePanel.js",
+  "dist/components/MessagePanel.js.map",
+  "dist/components/ProgressPanel.js",
+  "dist/components/ProgressPanel.js.map",
+  "dist/components/StopPanel.js",
+  "dist/components/StopPanel.js.map",
+  "dist/index.js",
+  "dist/index.js.map",
+  "dist/vendors/semantic-ui-niwsf.js",
+  "dist/vendors/semantic-ui-niwsf.js.map",
+  "dist/vendors~components/DigitTimer.js",
+  "index.html",
+  "manifest.json",
+  "service-worker.js"
 ];
 
 // The install handler takes care of precaching the resources we always need.
