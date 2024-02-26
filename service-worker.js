@@ -16,7 +16,7 @@
 // Names of the two caches used in this version of the service worker.
 // Change to v2, etc. when you update any of the local resources, which will
 // in turn trigger the install event again.
-const PRECACHE = 'precache-v20240226-014047';
+const PRECACHE = 'precache-v20240226-132621';
 const RUNTIME = 'runtime';
 
 /**
@@ -68,6 +68,43 @@ const PRECACHE_URLS = [
   "dist/vendors/semantic-ui-niwsf.js",
   "dist/vendors/semantic-ui-niwsf.js.map",
   "dist/vendors~components/DigitTimer.js",
+  "assets/audios/beep-sound-8333.md",
+  "assets/audios/beep-sound-8333.mp3",
+  "assets/audios/correct-6033.md",
+  "assets/audios/correct-6033.mp3",
+  "assets/audios/countdown-3-96619.md",
+  "assets/audios/countdown-3-96619.mp3",
+  "assets/audios/success-1-6297.md",
+  "assets/audios/success-1-6297.mp3",
+  "assets/favicon/README.md",
+  "assets/favicon/favicon.png",
+  "assets/favicon/generator/android-icon-144x144.png",
+  "assets/favicon/generator/android-icon-192x192.png",
+  "assets/favicon/generator/android-icon-36x36.png",
+  "assets/favicon/generator/android-icon-48x48.png",
+  "assets/favicon/generator/android-icon-72x72.png",
+  "assets/favicon/generator/android-icon-96x96.png",
+  "assets/favicon/generator/apple-icon-114x114.png",
+  "assets/favicon/generator/apple-icon-120x120.png",
+  "assets/favicon/generator/apple-icon-144x144.png",
+  "assets/favicon/generator/apple-icon-152x152.png",
+  "assets/favicon/generator/apple-icon-180x180.png",
+  "assets/favicon/generator/apple-icon-57x57.png",
+  "assets/favicon/generator/apple-icon-60x60.png",
+  "assets/favicon/generator/apple-icon-72x72.png",
+  "assets/favicon/generator/apple-icon-76x76.png",
+  "assets/favicon/generator/apple-icon-precomposed.png",
+  "assets/favicon/generator/apple-icon.png",
+  "assets/favicon/generator/browserconfig.xml",
+  "assets/favicon/generator/favicon-16x16.png",
+  "assets/favicon/generator/favicon-32x32.png",
+  "assets/favicon/generator/favicon-96x96.png",
+  "assets/favicon/generator/favicon.ico",
+  "assets/favicon/generator/manifest.json",
+  "assets/favicon/generator/ms-icon-144x144.png",
+  "assets/favicon/generator/ms-icon-150x150.png",
+  "assets/favicon/generator/ms-icon-310x310.png",
+  "assets/favicon/generator/ms-icon-70x70.png",
   "index.html",
   "manifest.json",
   "service-worker.js"

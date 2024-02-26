@@ -31,6 +31,8 @@ function getAllFiles(dirPath, arrayOfFiles) {
 
 let filesArray = getAllFiles('./dist');
 
+filesArray = filesArray.concat(getAllFiles('./assets'))
+
 filesArray = filesArray.concat([
   'index.html',
   'manifest.json',
