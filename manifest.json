@@ -6,7 +6,7 @@
   "display": "fullscreen",
   "background_color": "#E1F7F7",
   "description": "Countdown Timer",
-  "orientation": "landscape",
+  "orientation": "any",
   "icons": [{
     "src": "assets/favicon/favicon.png",
     "sizes": "512x512",
